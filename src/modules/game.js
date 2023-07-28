@@ -1,51 +1,44 @@
-const leaderBoardAPI = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/';
+export default class Game {
+  constructor() {
+    this.leaderBoardAPI = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/';
+  }
 
-export class Game {
-  createGame = async () => {
-    try {
-      const response = await fetch(`${leaderBoardAPI}/games`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name: 'football' }),
-      });
+  async startGame(gameName) {
+    const responseStartGame = await fetch(this.leaderBoardAPI, {
+      method: 'post',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: gameName,
+      }),
+    });
+    const responseStartGameData = await responseStartGame.json();
+    return responseStartGameData;
+  }
 
-      const data = await response.json();
+  async getLeaderBoard(gameId) {
+    const responseGetLeaderBoard = await fetch(`${this.leaderBoardAPI}${gameId}/scores/`);
+    const responseGetLeaderBoardData = await responseGetLeaderBoard.json();
+    return responseGetLeaderBoardData;
+  }
 
-      if (data && data.id) {
-        return data.id;
-      } else {
-        throw new Error('Invalid response data format');
-      }
-    } catch (err) {
-      return err;
+  async addScore(gameId, score, name) {
+    if (name === '' || score === '') {
+      alert('Please enter a correct value');
     }
-  };
 
-  getScores = async (gameId) => {
-    try {
-      const response = await fetch(`${leaderBoardAPI}/games/${gameId}/scores/`);
-      const data = await response.json();
-      return data;
-    } catch (err) {
-      return err;
-    }
-  };
-
-  newScore = async (gameId, score) => {
-    try {
-      const response = await fetch(`${leaderBoardAPI}/games/${gameId}/scores`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ score }),
-      });
-      const data = await response.json();
-      return data;
-    } catch (err) {
-      return err;
-    }
+    const responseAddScore = await fetch(`${this.leaderBoardAPI}${gameId}/scores/`, {
+      method: 'post',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        score,
+        name,
+      }),
+    });
+    const responseAddScoreData = await responseAddScore.json();
+    return responseAddScoreData;
   }
 }
