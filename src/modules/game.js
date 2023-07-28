@@ -49,16 +49,3 @@ export class Game {
     }
   }
 }
-
-
-fetch(`${leaderBoardAPI}`)
-.then(res => res.json())
-.then(data => console.log(data))
-.catch(err => console.log(err))
-
-fetch(`${leaderBoardAPI}`)
-try {
-
-} catch {
-
-}
