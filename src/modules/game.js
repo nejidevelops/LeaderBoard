@@ -4,8 +4,8 @@ export default class Game {
   }
 
   async startGame(gameName) {
-    const responseStartGame = await fetch(this.leaderBoardAPI, {
-      method: 'post',
+    const response = await fetch(this.leaderBoardAPI, {
+      method: 'POST',
       headers: {
         'Content-type': 'application/json',
       },
@@ -13,14 +13,14 @@ export default class Game {
         name: gameName,
       }),
     });
-    const responseStartGameData = await responseStartGame.json();
-    return responseStartGameData;
+    const responseReturn = await response.json();
+    return responseReturn;
   }
 
   async getLeaderBoard(gameId) {
-    const responseGetLeaderBoard = await fetch(`${this.leaderBoardAPI}${gameId}/scores/`);
-    const responseGetLeaderBoardData = await responseGetLeaderBoard.json();
-    return responseGetLeaderBoardData;
+    const responseScore = await fetch(`${this.leaderBoardAPI}${gameId}/scores/`);
+    const responseReturn = await responseScore.json();
+    return responseReturn;
   }
 
   async addScore(gameId, score, name) {
@@ -28,17 +28,17 @@ export default class Game {
       alert('Please enter a correct value');
     }
 
-    const responseAddScore = await fetch(`${this.leaderBoardAPI}${gameId}/scores/`, {
-      method: 'post',
+    const responseScore = await fetch(`${this.leaderBoardAPI}${gameId}/scores/`, {
+      method: 'POST',
       headers: {
         'Content-type': 'application/json',
       },
       body: JSON.stringify({
+        user: name,
         score,
-        name,
       }),
     });
-    const responseAddScoreData = await responseAddScore.json();
-    return responseAddScoreData;
+    const responseReturn = await responseScore.json();
+    return responseReturn;
   }
 }
