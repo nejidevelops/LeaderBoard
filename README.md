@@ -12,7 +12,6 @@
   - [🛠 Built With](#built-with)
     - [Tech Stack](#tech-stack)
     - [Key Features](#key-features)
-  - [🚀 Live Demo](#live-demo)
 - [💻 Getting Started](#getting-started)
   - [Setup](#setup)
   - [Prerequisites](#prerequisites)
@@ -52,11 +51,6 @@ This is a Leaderboard project that consume an API and allow interactivity and co
 - **Working with webpack**
 - **Consumption of APIs.**
 - **Async, Callbacks and Promise**
-
-
-## 🚀 Live Demo <a name="live-demo"></a>
-**Live link will be dropped soon**
-
 
 ## 💻 Getting Started <a name="getting-started"></a>
 
